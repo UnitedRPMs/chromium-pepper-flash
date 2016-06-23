@@ -3,7 +3,7 @@
 Summary:        Chromium Flash player plugin
 Name:           chromium-pepper-flash
 Version:        21.0.0.242
-Release:        1%{?dist}
+Release:        2%{?dist}
 
 License:        Proprietary
 Url:            http://www.google.com/chrome
@@ -11,7 +11,7 @@ Group:          Applications/Internet
 Source:		http://www.google.com/chrome/intl/en/eula_text.html
 
 BuildRequires:  rpm cpio wget
-
+ExclusiveArch:	x86_64
 Obsoletes: chromium-pepper-flash-chromium-pdf-plugin
 
 %description
@@ -22,28 +22,45 @@ Pepper API based Adobe Flash plugin for Google's Open Source browser Chromium.
 %setup -c -T
 wget -c -P %{_builddir}/%{name}-%{version} https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
 
-
 %build
 
 rpm2cpio %{_builddir}/%{name}-%{version}/google-chrome-stable_current_x86_64.rpm | cpio -idmv
 
 
-
 %install
-install -dm 755 %{buildroot}%{_libdir}/chromium/PepperFlash/
+install -dm 755 %{buildroot}/%{_libdir}/chromium/PepperFlash/
+install -dm 755 %{buildroot}/%{_libdir}/chromium-browser/pepper/
 install -dm 755 %{buildroot}/usr/share/licenses/%{name}/
-install -m644 %{_builddir}/%{name}-%{version}/opt/google/chrome/PepperFlash/* %{buildroot}%{_libdir}/chromium/PepperFlash/ 
+install -m644 %{_builddir}/%{name}-%{version}/opt/google/chrome/PepperFlash/* %{buildroot}/%{_libdir}/chromium/PepperFlash/
+
+cat > %{buildroot}/%{_libdir}/chromium-browser/pepper/pepper-flash.info << EOF
+# Copyright (c) 2016 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+# Registration file for Pepper Flash player.
+
+FILE_NAME=%{_libdir}/chromium/PepperFlash/libpepflashplayer.so
+PLUGIN_NAME="Shockwave Flash"
+VERSION="%{version}"
+VISIBLE_VERSION="%{version}"
+DESCRIPTION="$PLUGIN_NAME $VISIBLE_VERSION"
+MIME_TYPES="application/x-shockwave-flash"
+EOF
 
 # License
 install -m644 %{SOURCE0} %{buildroot}/%{_datadir}/licenses/%{name}/
 
 %files
 %dir %{_libdir}/chromium/
-%{_libdir}/chromium/PepperFlash/
+%{_libdir}/chromium/PepperFlash
 %{_datadir}/licenses/%{name}/eula_text.html
-
+%{_libdir}/chromium-browser/pepper/pepper-flash.info
 
 %changelog
+
+* Tue Jun 21 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 21.0.0.242-2
+- Compatibility with chromium-bin
 
 * Wed Jun 15 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 21.0.0.242-1
 - Updated to 21.0.0.242
