@@ -2,8 +2,8 @@
 
 Summary:        Chromium Flash player plugin
 Name:           chromium-pepper-flash
-Version:        21.0.0.242
-Release:        2%{?dist}
+Version:        22.0.0.192
+Release:        1%{?dist}
 
 License:        Proprietary
 Url:            http://www.google.com/chrome
@@ -58,6 +58,9 @@ install -m644 %{SOURCE0} %{buildroot}/%{_datadir}/licenses/%{name}/
 %{_libdir}/chromium-browser/pepper/pepper-flash.info
 
 %changelog
+
+* Tue Jul 12 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 22.0.0.192-1
+- Updated to 22.0.0.192
 
 * Tue Jun 21 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 21.0.0.242-2
 - Compatibility with chromium-bin
