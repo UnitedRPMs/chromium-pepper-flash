@@ -2,7 +2,7 @@
  
 Summary:        Chromium Flash player plugin
  
-Version:        22.0.0.209
+Version:        23.0.0.162
  
-License:        Proprietary
+License:        LGPLv3
  

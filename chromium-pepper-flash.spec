@@ -1,18 +1,22 @@
 %define debug_package %{nil}
+%ifarch x86_64 
+%global arch	x86_64
+%else
+%global arch 	i386
+%endif
 
 Summary:        Chromium Flash player plugin
 Name:           chromium-pepper-flash
-Version:        22.0.0.209
+Version:        23.0.0.162
 Release:        1%{?dist}
 
-License:        Proprietary
-Url:            http://www.google.com/chrome
+License:        LGPLv3
+Url:            http://www.adobe.com/products/flashplayer/
 Group:          Applications/Internet
-Source:		http://www.google.com/chrome/intl/en/eula_text.html
+Source:		http://wwwimages.adobe.com/content/dam/acom/en/legal/licenses-terms/pdf/Flash_Player_23_0.pdf
 
-BuildRequires:  rpm cpio wget
-ExclusiveArch:	x86_64
-Obsoletes: chromium-pepper-flash-chromium-pdf-plugin
+BuildRequires:  wget tar
+Obsoletes: 	chromium-pepper-flash-chromium-pdf-plugin
 
 %description
 Pepper API based Adobe Flash plugin for Google's Open Source browser Chromium.
@@ -20,18 +24,21 @@ Pepper API based Adobe Flash plugin for Google's Open Source browser Chromium.
 
 %prep
 %setup -c -T
-wget -c -P %{_builddir}/%{name}-%{version} https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+# wget -c -P %{_builddir}/%{name}-%{version} https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+wget -c -P %{_builddir}/%{name}-%{version} https://fpdownload.adobe.com/pub/flashplayer/pdc/%{version}/flash_player_ppapi_linux.%{arch}.tar.gz
+
 
 %build
 
-rpm2cpio %{_builddir}/%{name}-%{version}/google-chrome-stable_current_x86_64.rpm | cpio -idmv
-
+# rpm2cpio %{_builddir}/%{name}-%{version}/google-chrome-stable_current_x86_64.rpm | cpio -idmv
+tar xmzvf flash_player_ppapi_linux.%{arch}.tar.gz -C %{_builddir}/%{name}-%{version}
 
 %install
 install -dm 755 %{buildroot}/%{_libdir}/chromium/PepperFlash/
 install -dm 755 %{buildroot}/%{_libdir}/chromium-browser/pepper/
 install -dm 755 %{buildroot}/usr/share/licenses/%{name}/
-install -m644 %{_builddir}/%{name}-%{version}/opt/google/chrome/PepperFlash/* %{buildroot}/%{_libdir}/chromium/PepperFlash/
+install -m644 %{_builddir}/%{name}-%{version}/*.json %{buildroot}/%{_libdir}/chromium/PepperFlash/
+install -m644 %{_builddir}/%{name}-%{version}/*.so %{buildroot}/%{_libdir}/chromium/PepperFlash/
 
 cat > %{buildroot}/%{_libdir}/chromium-browser/pepper/pepper-flash.info << EOF
 # Copyright (c) 2016 The Chromium OS Authors. All rights reserved.
@@ -50,17 +57,18 @@ EOF
 
 # License
 install -m644 %{SOURCE0} %{buildroot}/%{_datadir}/licenses/%{name}/
+install -m644 %{_builddir}/%{name}-%{version}/LGPL/*.txt %{buildroot}/%{_datadir}/licenses/%{name}/
 
 %files
 %dir %{_libdir}/chromium/
 %{_libdir}/chromium/PepperFlash
-%{_datadir}/licenses/%{name}/eula_text.html
+%{_datadir}/licenses/%{name}/
 %{_libdir}/chromium-browser/pepper/pepper-flash.info
 
 %changelog
 
-* Fri Jul 29 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 22.0.0.209-1
-- Updated to 22.0.0.209
+* Tue Sep 13 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 23.0.0.162-1
+- Updated to 23.0.0.162
 
 * Tue Jul 12 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 22.0.0.192-1
 - Updated to 22.0.0.192
