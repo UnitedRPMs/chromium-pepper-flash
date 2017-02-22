@@ -9,8 +9,8 @@
 
 Summary:        Chromium Flash player plugin 
 Name:           chromium-pepper-flash
-Version:        24.0.0.186
-Release:        2%{?dist}
+Version:        24.0.0.221
+Release:        1%{?dist}
 
 License:        Proprietary
 Url:            http://www.adobe.com/products/flashplayer/
@@ -118,6 +118,9 @@ install -D libflashplayer.so %{buildroot}/%{_libdir}/mozilla/plugins/libflashpla
 %{_datadir}/icons/hicolor/48x48/apps/flash-player-properties.png
 
 %changelog
+
+* Wed Feb 22 2017 David Vásquez <davidjeremias82 AT gmail DOT com> - 24.0.0.221-1
+- Updated to 24.0.0.221
 
 * Tue Jan 3 2017 David Vásquez <davidjeremias82 AT gmail DOT com> - 24.0.0.186-2
 - Support npapi
