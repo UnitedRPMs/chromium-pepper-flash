@@ -9,7 +9,7 @@
 
 Summary:        Chromium Flash player plugin 
 Name:           chromium-pepper-flash
-Version:        26.0.0.131
+Version:        26.0.0.137
 Release:        1%{?dist}
 
 License:        Proprietary
@@ -118,6 +118,9 @@ install -D libflashplayer.so %{buildroot}/%{_libdir}/mozilla/plugins/libflashpla
 %{_datadir}/icons/hicolor/48x48/apps/flash-player-properties.png
 
 %changelog
+
+* Mon Jul 17 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> - 26.0.0.137-1
+- Updated to 26.0.0.137
 
 * Tue Jun 20 2017 Unitedrpms Project <unitedrpms AT protonmail DOT com> - 26.0.0.131-1
 - Updated to 26.0.0.131
