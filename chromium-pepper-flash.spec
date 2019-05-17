@@ -119,7 +119,7 @@ install -D libflashplayer.so %{buildroot}/%{_libdir}/mozilla/plugins/libflashpla
 
 %changelog
 
-* Wed May 16 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> - 32.0.0.192-2
+* Thu May 16 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> - 32.0.0.192-2
 - Updated to 32.0.0.192
 
 * Wed Apr 10 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> - 32.0.0.171-2
