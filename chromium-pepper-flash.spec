@@ -7,26 +7,26 @@
 %global plat_lib lib
 %endif
 
-Summary:        Chromium Flash player plugin 
-Name:           chromium-pepper-flash
-Version:        32.0.0.270
-Release:        2%{?dist}
+Summary:	Chromium Flash player plugin 
+Name:		chromium-pepper-flash
+Version:	32.0.0.293
+Release:	2%{?dist}
 
-License:        Proprietary
-Url:            http://www.adobe.com/products/flashplayer/
-Group:          Applications/Internet
-Source:		http://wwwimages.adobe.com/content/dam/acom/en/legal/licenses-terms/pdf/Flash_Player_27_0.pdf
+License:	Proprietary
+Url:		http://www.adobe.com/products/flashplayer/
+Group:		Applications/Internet
+Source:	http://wwwimages.adobe.com/content/dam/acom/en/legal/licenses-terms/pdf/Flash_Player_27_0.pdf
 Source1:	mms.cfg	
 
-BuildRequires:  wget tar
-Obsoletes: 	chromium-pepper-flash-chromium-pdf-plugin
+BuildRequires:	wget tar
+Obsoletes:	chromium-pepper-flash-chromium-pdf-plugin
 Provides:	pepper-flash
 
 %description
 Pepper API (ppapi) based Adobe Flash plugin for Google's Open Source browser Chromium.
 
 %package -n	flashplugin
-Summary:        Adobe Flash Player
+Summary:	Adobe Flash Player
 Provides:	flash-plugin = %{version}-%{release}
 
 %description -n flashplugin
@@ -118,6 +118,9 @@ install -D libflashplayer.so %{buildroot}/%{_libdir}/mozilla/plugins/libflashpla
 %{_datadir}/icons/hicolor/48x48/apps/flash-player-properties.png
 
 %changelog
+
+* Mon Nov 11 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> - 32.0.0.293-2
+- Updated to 32.0.0.293
 
 * Fri Oct 11 2019 Unitedrpms Project <unitedrpms AT protonmail DOT com> - 32.0.0.270-2
 - Updated to 32.0.0.270
