@@ -5,3 +5,4 @@ SPECS/*
 SRPMS/*
 flash_player*.rpm
 .directory
+*.rpm
